@@ -310,11 +310,12 @@ notion-roll/
    - ✅ Handle inline annotations: bold, italic, strikethrough, code, links
    - ✅ Unsupported blocks: render as HTML comment `<!-- notion:type -->`
 
-10. **Implement property converters**
-    - `getDatabaseSchema` with in-memory caching
-    - Convert input values based on schema (write-supported types)
-    - Read-only types: return raw Notion format
-    - Reverse conversion for responses
+10. ✅ **Implement property converters**
+    - ✅ `SchemaCache` class with in-memory caching for data source schemas
+    - ✅ `toNotionProperties` - convert input values to Notion format based on schema
+    - ✅ `fromNotionProperties` - convert Notion properties to simple values
+    - ✅ Write-supported types: title, rich_text, number, select, multi_select, status, date, checkbox, url, email, phone_number
+    - ✅ Read-only types: returned as raw Notion format
 
 ### Phase 4: NotionRoll Facade (Step 11)
 
