@@ -263,10 +263,10 @@ notion-roll/
    - ✅ Create source structure: server.ts, routes/ (pages, databases, health)
    - ✅ Add vitest configs and test setup helpers
 
-4. **Configure build and test scripts**
-   - Root scripts for build-all, test-all
-   - Package-specific scripts
-   - Integration test script requiring `NOTION_API_KEY`
+4. ✅ **Configure build and test scripts**
+   - ✅ Root scripts: build, typecheck, test, test:integration, lint, format, clean
+   - ✅ Package-specific scripts with typecheck and clean
+   - ✅ Integration test script (scripts/test-integration.sh) requiring env vars
 
 ### Phase 2: Core Types & Primitives (Steps 5-7)
 

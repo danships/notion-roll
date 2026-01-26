@@ -4,11 +4,13 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
-    "test:integration": "pnpm -r test:integration",
+    "test:integration": "./scripts/test-integration.sh",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "clean": "pnpm -r clean"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
