@@ -270,11 +270,11 @@ notion-roll/
 
 ### Phase 2: Core Types & Primitives (Steps 5-7)
 
-5. **Define core types and constraints**
-   - Define `PageResponse`, `ParentRef`, `NotionRollError`
-   - Define supported property types (write vs read-only)
-   - Define supported markdown/block features
-   - Export pass-through types for `NotionFilter`/`NotionSort`
+5. ✅ **Define core types and constraints**
+   - ✅ Define `PageResponse`, `ParentRef`, `NotionRollError`
+   - ✅ Define supported property types (WRITABLE_PROPERTY_TYPES, READ_ONLY_PROPERTY_TYPES)
+   - ✅ Define supported markdown/block features (SUPPORTED_MARKDOWN_FEATURES)
+   - ✅ Export pass-through types for `NotionFilter`/`NotionSort`
 
 6. **Implement Notion API client wrapper**
    - HTTP request wrapper using native fetch
@@ -292,15 +292,15 @@ notion-roll/
 ### Phase 3: Converters (Steps 8-10)
 
 8. **Implement markdown-to-blocks converter**
-   - Parse markdown using marked/remark
+   - Parse markdown using `marked`
    - Map to Notion block types (defined subset)
    - Handle inline formatting (bold, italic, links, code)
    - Handle code blocks with language
    - Unsupported: fallback to paragraph with raw text
 
 9. **Implement blocks-to-markdown converter**
-   - Traverse Notion block tree (using listBlockChildren)
-   - Generate markdown from each block type
+   - Use `notion-to-md` package for Notion blocks → Markdown
+   - Wrap with our API client for block fetching
    - Handle nested blocks (lists)
    - Unsupported blocks: render as HTML comment
 
@@ -380,7 +380,8 @@ notion-roll/
 ## Dependencies
 
 ### notion-roll
-- `marked` or `remark` - Markdown parsing
+- `notion-to-md` - Notion blocks ↔ Markdown conversion
+- `marked` - Markdown parsing (for MD → Notion blocks)
 - `typescript` - Development
 
 ### notion-roll-server
