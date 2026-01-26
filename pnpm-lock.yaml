@@ -30,6 +30,8 @@ importers:
         specifier: ^3.0.0
         version: 3.2.4(@types/node@22.19.7)
 
+  packages/notion-roll: {}
+
 packages:
 
   '@babel/helper-validator-identifier@7.28.5':

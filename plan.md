@@ -249,11 +249,12 @@ notion-roll/
    - ✅ Add `.gitignore`, `README.md`
    - ✅ Add root ESLint (with typescript-eslint + unicorn) and Prettier config
 
-2. **Set up notion-roll package**
-   - Create `packages/notion-roll/package.json` with ESM exports
-   - Create `tsconfig.json` extending base
-   - Set up source directory structure
-   - Add dev dependencies: typescript, vitest
+2. ✅ **Set up notion-roll package**
+   - ✅ Create `packages/notion-roll/package.json` with ESM exports
+   - ✅ Create `tsconfig.json` extending base
+   - ✅ Set up source directory structure (client, types, markdown/, properties/, api/)
+   - ✅ Add vitest configs (unit + integration)
+   - ✅ Add test setup with env var handling
 
 3. **Set up notion-roll-server package**
    - Create `packages/notion-roll-server/package.json`
