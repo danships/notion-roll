@@ -295,12 +295,13 @@ notion-roll/
 
 ### Phase 3: Converters (Steps 8-10)
 
-8. **Implement markdown-to-blocks converter**
-   - Parse markdown using `marked`
-   - Map to Notion block types (defined subset)
-   - Handle inline formatting (bold, italic, links, code)
-   - Handle code blocks with language
-   - Unsupported: fallback to paragraph with raw text
+8. ✅ **Implement markdown-to-blocks converter**
+   - ✅ Parse markdown using `marked` Lexer
+   - ✅ Map to Notion block types: heading_1/2/3, paragraph, code, quote, divider, image
+   - ✅ Handle inline formatting (bold, italic, strikethrough, code, links)
+   - ✅ Handle code blocks with language mapping
+   - ✅ Handle lists (bulleted_list_item, numbered_list_item)
+   - ✅ Unsupported: fallback to paragraph with raw text
 
 9. **Implement blocks-to-markdown converter**
    - Use `notion-to-md` package for Notion blocks → Markdown
