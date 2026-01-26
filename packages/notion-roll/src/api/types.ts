@@ -18,7 +18,41 @@ export interface NotionPage {
 export type NotionParent =
   | { type: "page_id"; page_id: string }
   | { type: "database_id"; database_id: string }
+  | { type: "data_source_id"; data_source_id: string }
   | { type: "workspace"; workspace: true };
+
+export interface NotionBlocksResponse {
+  object: "list";
+  results: NotionBlock[];
+  next_cursor: string | null;
+  has_more: boolean;
+}
+
+export interface NotionDatabase {
+  object: "database";
+  id: string;
+  created_time: string;
+  last_edited_time: string;
+  title: NotionRichText[];
+  properties: Record<string, NotionPropertyConfig>;
+  parent: NotionParent;
+  archived: boolean;
+  data_sources?: NotionDataSource[];
+}
+
+export interface NotionDataSource {
+  object: "data_source";
+  id: string;
+  type: "default" | "external";
+  properties?: Record<string, NotionPropertyConfig>;
+}
+
+export interface NotionPropertyConfig {
+  id: string;
+  name: string;
+  type: string;
+  [key: string]: unknown;
+}
 
 export interface NotionRichText {
   type: "text";

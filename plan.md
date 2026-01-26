@@ -285,12 +285,13 @@ notion-roll/
    - ✅ Rate limit handling (429 retry with exponential backoff, max 3 retries)
    - ✅ Updated for Notion API 2025-09-03 (data source support)
 
-7. **Implement low-level Notion primitives**
-   - `getPageMeta(pageId)` - page metadata only
-   - `listBlockChildren(blockId, cursor?)` - paginated + recursive helper
-   - `appendBlockChildren(blockId, children)` - add blocks
-   - `deleteBlockChildren(blockId)` - clear blocks for replace mode
-   - `updatePageProperties(pageId, properties)` - property updates
+7. ✅ **Implement low-level Notion primitives**
+   - ✅ `getPageMeta(pageId)` - page metadata only
+   - ✅ `listBlockChildren(blockId, cursor?)` - paginated + `listAllBlockChildren` recursive helper
+   - ✅ `appendBlockChildren(blockId, children)` - add blocks
+   - ✅ `deleteBlockChildren(blockId)` - clear blocks for replace mode
+   - ✅ `updatePageProperties(pageId, properties)` - property updates
+   - ✅ Database/Data Source primitives: `getDatabase`, `getDataSources`, `queryDataSource`, `updateDataSource`
 
 ### Phase 3: Converters (Steps 8-10)
 
