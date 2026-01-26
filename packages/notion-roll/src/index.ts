@@ -8,6 +8,7 @@ export type {
   Paginated,
   DatabaseQueryRequest,
   DatabaseSchema,
+  DataSourceInfo,
   PropertySchema,
   PropertyType,
   WritablePropertyType,

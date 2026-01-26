@@ -4,7 +4,9 @@ export interface NotionRollConfig {
   notionVersion?: string;
 }
 
-export type ParentRef = { pageId: string } | { databaseId: string };
+// Parent reference for creating pages
+// Use dataSourceId for database pages (required in API 2025-09-03 for multi-source databases)
+export type ParentRef = { pageId: string } | { dataSourceId: string };
 
 export interface PageCreateRequest {
   parent: ParentRef;
@@ -37,7 +39,7 @@ export interface Paginated<T> {
 }
 
 export interface DatabaseQueryRequest {
-  databaseId: string;
+  dataSourceId: string; // Changed from databaseId in API 2025-09-03
   filter?: NotionFilter;
   sorts?: NotionSort[];
   pageSize?: number;
@@ -48,6 +50,12 @@ export interface DatabaseSchema {
   id: string;
   title: string;
   properties: Record<string, PropertySchema>;
+}
+
+// Data source info returned from database retrieval (API 2025-09-03)
+export interface DataSourceInfo {
+  id: string;
+  type: "default" | "external";
 }
 
 export interface PropertySchema {

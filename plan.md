@@ -23,11 +23,12 @@ A monorepo containing two packages:
 interface NotionRollConfig {
   apiKey: string;
   baseUrl?: string;        // defaults to https://api.notion.com/v1
-  notionVersion?: string;  // defaults to latest supported version
+  notionVersion?: string;  // defaults to 2025-09-03
 }
 
-// Explicit parent typing (matches Notion semantics)
-type ParentRef = { pageId: string } | { databaseId: string };
+// Explicit parent typing (matches Notion API 2025-09-03 semantics)
+// Use dataSourceId for database pages (required for multi-source databases)
+type ParentRef = { pageId: string } | { dataSourceId: string };
 
 interface PageCreateRequest {
   parent: ParentRef;
@@ -61,7 +62,7 @@ interface Paginated<T> {
 }
 
 interface DatabaseQueryRequest {
-  databaseId: string;
+  dataSourceId: string;    // Changed from databaseId in API 2025-09-03
   filter?: NotionFilter;   // Pass-through Notion filter type
   sorts?: NotionSort[];    // Pass-through Notion sort type
   pageSize?: number;
@@ -85,9 +86,10 @@ class NotionRoll {
   updatePage(request: PageUpdateRequest): Promise<PageResponse>;
   archivePage(pageId: string): Promise<PageResponse>; // Notion "delete" = archive
   
-  // Database operations
-  queryDatabase(request: DatabaseQueryRequest): Promise<Paginated<PageResponse>>;
-  getDatabaseSchema(databaseId: string): Promise<DatabaseSchema>;
+  // Database/Data Source operations (API 2025-09-03)
+  queryDataSource(request: DatabaseQueryRequest): Promise<Paginated<PageResponse>>;
+  getDataSourceSchema(dataSourceId: string): Promise<DatabaseSchema>;
+  getDataSources(databaseId: string): Promise<DataSourceInfo[]>;
 }
 ```
 
@@ -278,9 +280,10 @@ notion-roll/
 
 6. ✅ **Implement Notion API client wrapper**
    - ✅ HTTP request wrapper using native fetch (ApiClient class)
-   - ✅ Include `Authorization`, `Notion-Version` headers
+   - ✅ Include `Authorization`, `Notion-Version` headers (default: 2025-09-03)
    - ✅ Error handling with typed `NotionRollError`
    - ✅ Rate limit handling (429 retry with exponential backoff, max 3 retries)
+   - ✅ Updated for Notion API 2025-09-03 (data source support)
 
 7. **Implement low-level Notion primitives**
    - `getPageMeta(pageId)` - page metadata only

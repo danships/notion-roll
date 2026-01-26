@@ -2,7 +2,7 @@ import { NotionRollError } from "../types.js";
 import type { NotionApiError } from "./types.js";
 
 const DEFAULT_BASE_URL = "https://api.notion.com/v1";
-const DEFAULT_NOTION_VERSION = "2022-06-28";
+const DEFAULT_NOTION_VERSION = "2025-09-03";
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY_MS = 1000;
 

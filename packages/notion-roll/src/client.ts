@@ -7,6 +7,7 @@ import type {
   Paginated,
   DatabaseQueryRequest,
   DatabaseSchema,
+  DataSourceInfo,
 } from "./types.js";
 
 export class NotionRoll {
@@ -39,13 +40,19 @@ export class NotionRoll {
     throw new Error("Not implemented");
   }
 
-  async queryDatabase(
+  // Database/Data Source operations (API 2025-09-03)
+
+  async queryDataSource(
     _request: DatabaseQueryRequest
   ): Promise<Paginated<PageResponse>> {
     throw new Error("Not implemented");
   }
 
-  async getDatabaseSchema(_databaseId: string): Promise<DatabaseSchema> {
+  async getDataSourceSchema(_dataSourceId: string): Promise<DatabaseSchema> {
+    throw new Error("Not implemented");
+  }
+
+  async getDataSources(_databaseId: string): Promise<DataSourceInfo[]> {
     throw new Error("Not implemented");
   }
 }
