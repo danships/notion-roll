@@ -1,3 +1,4 @@
+import { ApiClient } from "./api/client.js";
 import type {
   NotionRollConfig,
   PageCreateRequest,
@@ -9,14 +10,14 @@ import type {
 } from "./types.js";
 
 export class NotionRoll {
-  private readonly apiKey: string;
-  private readonly baseUrl: string;
-  private readonly notionVersion: string;
+  private readonly api: ApiClient;
 
   constructor(config: NotionRollConfig) {
-    this.apiKey = config.apiKey;
-    this.baseUrl = config.baseUrl ?? "https://api.notion.com/v1";
-    this.notionVersion = config.notionVersion ?? "2022-06-28";
+    this.api = new ApiClient({
+      apiKey: config.apiKey,
+      baseUrl: config.baseUrl,
+      notionVersion: config.notionVersion,
+    });
   }
 
   async createPage(_request: PageCreateRequest): Promise<PageResponse> {

@@ -276,11 +276,11 @@ notion-roll/
    - ✅ Define supported markdown/block features (SUPPORTED_MARKDOWN_FEATURES)
    - ✅ Export pass-through types for `NotionFilter`/`NotionSort`
 
-6. **Implement Notion API client wrapper**
-   - HTTP request wrapper using native fetch
-   - Include `Authorization`, `Notion-Version` headers
-   - Error handling with typed `NotionRollError`
-   - Rate limit handling (429 retry with backoff)
+6. ✅ **Implement Notion API client wrapper**
+   - ✅ HTTP request wrapper using native fetch (ApiClient class)
+   - ✅ Include `Authorization`, `Notion-Version` headers
+   - ✅ Error handling with typed `NotionRollError`
+   - ✅ Rate limit handling (429 retry with exponential backoff, max 3 retries)
 
 7. **Implement low-level Notion primitives**
    - `getPageMeta(pageId)` - page metadata only
