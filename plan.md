@@ -256,11 +256,12 @@ notion-roll/
    - ✅ Add vitest configs (unit + integration)
    - ✅ Add test setup with env var handling
 
-3. **Set up notion-roll-server package**
-   - Create `packages/notion-roll-server/package.json`
-   - Add esbuild and configuration
-   - Reference notion-roll as workspace dependency
-   - Create source directory structure
+3. ✅ **Set up notion-roll-server package**
+   - ✅ Create `packages/notion-roll-server/package.json`
+   - ✅ Add esbuild config (bundles with notion-roll inlined)
+   - ✅ Reference notion-roll as workspace dependency
+   - ✅ Create source structure: server.ts, routes/ (pages, databases, health)
+   - ✅ Add vitest configs and test setup helpers
 
 4. **Configure build and test scripts**
    - Root scripts for build-all, test-all

@@ -1,0 +1,25 @@
+{
+  "name": "notion-roll-server",
+  "version": "0.1.0",
+  "description": "HTTP server exposing notion-roll library as REST endpoints",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "start": "node dist/index.js",
+    "dev": "node --watch dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
+  },
+  "dependencies": {
+    "notion-roll": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
