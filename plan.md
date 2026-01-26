@@ -303,11 +303,12 @@ notion-roll/
    - ✅ Handle lists (bulleted_list_item, numbered_list_item)
    - ✅ Unsupported: fallback to paragraph with raw text
 
-9. **Implement blocks-to-markdown converter**
-   - Use `notion-to-md` package for Notion blocks → Markdown
-   - Wrap with our API client for block fetching
-   - Handle nested blocks (lists)
-   - Unsupported blocks: render as HTML comment
+9. ✅ **Implement blocks-to-markdown converter**
+   - ✅ Custom implementation (notion-to-md requires @notionhq/client)
+   - ✅ Handle all block types: paragraph, headings, lists, code, quote, divider, image, etc.
+   - ✅ Handle nested blocks (lists, toggles, columns)
+   - ✅ Handle inline annotations: bold, italic, strikethrough, code, links
+   - ✅ Unsupported blocks: render as HTML comment `<!-- notion:type -->`
 
 10. **Implement property converters**
     - `getDatabaseSchema` with in-memory caching
@@ -385,7 +386,6 @@ notion-roll/
 ## Dependencies
 
 ### notion-roll
-- `notion-to-md` - Notion blocks ↔ Markdown conversion
 - `marked` - Markdown parsing (for MD → Notion blocks)
 - `typescript` - Development
 
