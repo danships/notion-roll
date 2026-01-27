@@ -46,6 +46,9 @@ importers:
         specifier: workspace:*
         version: link:../notion-roll
     devDependencies:
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       esbuild:
         specifier: ^0.25.0
         version: 0.25.12

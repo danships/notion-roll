@@ -18,6 +18,7 @@
     "notion-roll": "workspace:*"
   },
   "devDependencies": {
+    "dotenv": "^17.2.3",
     "esbuild": "^0.25.0"
   },
   "license": "MIT",

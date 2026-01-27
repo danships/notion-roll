@@ -368,11 +368,12 @@ notion-roll/
     - ✅ Complex markdown round-trip
     - ✅ Cleanup after tests
 
-18. **Write integration tests for server** (opt-in via env vars)
-    - Start server with test config
-    - HTTP requests to all endpoints
-    - Verify Notion state changes
-    - Cleanup
+18. ✅ **Write integration tests for server** (opt-in via env vars)
+    - ✅ Start server with test config
+    - ✅ HTTP requests to all endpoints (health, pages CRUD, archive)
+    - ✅ Error handling (400, 404, CORS preflight)
+    - ✅ Verify Notion state changes
+    - ✅ Cleanup
 
 ### Phase 7: Documentation (Steps 19-20)
 
