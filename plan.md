@@ -361,11 +361,12 @@ notion-roll/
     - ✅ Blocks → markdown fixtures
     - ✅ Property converter tests with round-trip stability
 
-17. **Write integration tests for notion-roll** (opt-in via env vars)
-    - Create test container page
-    - CRUD operations with verification
-    - Database operations
-    - Cleanup after tests
+17. ✅ **Write integration tests for notion-roll** (opt-in via env vars)
+    - ✅ Create test container page
+    - ✅ CRUD operations with verification (create, get, update, archive)
+    - ✅ Content modes (replace/append)
+    - ✅ Complex markdown round-trip
+    - ✅ Cleanup after tests
 
 18. **Write integration tests for server** (opt-in via env vars)
     - Start server with test config

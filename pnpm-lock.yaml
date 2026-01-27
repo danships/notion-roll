@@ -35,6 +35,10 @@ importers:
       marked:
         specifier: ^17.0.1
         version: 17.0.1
+    devDependencies:
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
 
   packages/notion-roll-server:
     dependencies:
@@ -761,6 +765,10 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
+
+  dotenv@17.2.3:
+    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
+    engines: {node: '>=12'}
 
   electron-to-chromium@1.5.278:
     resolution: {integrity: sha512-dQ0tM1svDRQOwxnXxm+twlGTjr9Upvt8UFWAgmLsxEzFQxhbti4VwxmMjsDxVC51Zo84swW7FVCXEV+VAkhuPw==}
@@ -1809,6 +1817,8 @@ snapshots:
   deep-eql@5.0.2: {}
 
   deep-is@0.1.4: {}
+
+  dotenv@17.2.3: {}
 
   electron-to-chromium@1.5.278: {}
 
