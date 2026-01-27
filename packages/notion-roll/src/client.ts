@@ -188,7 +188,7 @@ export class NotionRoll {
     let title = "";
 
     // Extract title from properties
-    for (const [name, prop] of Object.entries(notionPage.properties)) {
+    for (const [_name, prop] of Object.entries(notionPage.properties)) {
       const propValue = prop as { type: string; title?: Array<{ plain_text: string }> };
       if (propValue.type === "title" && propValue.title) {
         title = propValue.title.map((t) => t.plain_text).join("");

@@ -1,9 +1,5 @@
 import type { ApiClient } from "./client.js";
-import type {
-  NotionDatabase,
-  NotionDataSource,
-  NotionBlocksResponse,
-} from "./types.js";
+import type { NotionDatabase, NotionDataSource } from "./types.js";
 
 export async function getDatabase(
   api: ApiClient,

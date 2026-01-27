@@ -18,6 +18,18 @@ export default tseslint.config(
       ],
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-import-type-side-effects": "error",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "unicorn/no-null": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/prefer-ternary": "off",
+      "unicorn/prefer-event-target": "off",
+      "unicorn/prefer-global-this": "off",
+      "unicorn/import-style": "off",
+      "unicorn/no-array-callback-reference": "off",
+      "unicorn/catch-error-name": "off",
     },
   }
 );
