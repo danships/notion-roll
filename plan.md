@@ -330,33 +330,36 @@ notion-roll/
 
 ### Phase 5: Server Implementation (Steps 12-14)
 
-12. **Create HTTP server with routing**
-    - Native Node HTTP server
-    - Simple path-based routing
-    - JSON request/response handling
-    - Error middleware with NotionRollError mapping
+12. ✅ **Create HTTP server with routing**
+    - ✅ Native Node HTTP server with CORS support
+    - ✅ Simple path-based routing
+    - ✅ JSON request/response handling (parseJsonBody, sendJson utils)
+    - ✅ Error middleware with NotionRollError mapping
+    - ✅ Auth via Authorization header or NOTION_API_KEY env var
 
-13. **Implement API routes**
-    - Page endpoints (POST, GET, PATCH, POST archive)
-    - Database endpoints (POST query, GET schema)
-    - Health check endpoint
+13. ✅ **Implement API routes**
+    - ✅ Page endpoints: POST /api/pages, GET/PATCH /api/pages/:id, POST /api/pages/:id/archive
+    - ✅ Database endpoints: POST /api/databases/:id/query, GET /api/databases/:id/schema
+    - ✅ GET /api/databases/:id/data-sources
+    - ✅ Health check endpoint
 
-14. **Configure esbuild bundling**
-    - Bundle server with notion-roll inlined
-    - Single executable output
-    - Source maps for debugging
+14. ✅ **Configure esbuild bundling** (already done in Step 3)
+    - ✅ Bundle server with notion-roll inlined
+    - ✅ Single executable output
+    - ✅ Source maps for debugging
 
 ### Phase 6: Testing (Steps 15-18)
 
-15. **Write unit tests with mocked fetch**
-    - Test API client: headers, error mapping, rate limit handling
-    - Test request/response formatting
-    - Skip Notion dependency for fast CI
+15. ✅ **Write unit tests with mocked fetch**
+    - ✅ Test API client: headers, error mapping, rate limit handling
+    - ✅ Test request/response formatting
+    - ✅ Skip Notion dependency for fast CI
+    - ✅ Server utility tests (parseJsonBody, sendJson, handleError, getNotionClient)
 
-16. **Write snapshot tests for converters**
-    - Markdown → blocks fixtures
-    - Blocks → markdown fixtures
-    - Round-trip stability tests
+16. ✅ **Write snapshot tests for converters**
+    - ✅ Markdown → blocks fixtures
+    - ✅ Blocks → markdown fixtures
+    - ✅ Property converter tests with round-trip stability
 
 17. **Write integration tests for notion-roll** (opt-in via env vars)
     - Create test container page

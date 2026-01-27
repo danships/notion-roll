@@ -2,11 +2,24 @@ import { createServer as createHttpServer, type Server } from "node:http";
 import { handlePages } from "./routes/pages.js";
 import { handleDatabases } from "./routes/databases.js";
 import { handleHealth } from "./routes/health.js";
+import { sendError, handleError } from "./utils.js";
 
 export function createServer(): Server {
   return createHttpServer(async (req, res) => {
     const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
     const path = url.pathname;
+
+    // CORS headers for development
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+    // Handle preflight
+    if (req.method === "OPTIONS") {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
 
     try {
       if (path === "/health") {
@@ -21,12 +34,9 @@ export function createServer(): Server {
         return await handleDatabases(req, res, path);
       }
 
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Not found" }));
+      sendError(res, 404, "Not found");
     } catch (error) {
-      console.error("Request error:", error);
-      res.writeHead(500, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Internal server error" }));
+      handleError(res, error);
     }
   });
 }

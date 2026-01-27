@@ -1,0 +1,607 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`blocksToMarkdown > converts blockquotes 1`] = `"> This is a quote"`;
+
+exports[`blocksToMarkdown > converts bullet lists 1`] = `
+"- First item
+
+- Second item
+
+- Third item"
+`;
+
+exports[`blocksToMarkdown > converts code blocks with language 1`] = `
+"\`\`\`typescript
+const x = 42;
+console.log(x);
+\`\`\`"
+`;
+
+exports[`blocksToMarkdown > converts headings 1`] = `
+"# Heading 1
+
+## Heading 2
+
+### Heading 3"
+`;
+
+exports[`blocksToMarkdown > converts horizontal rules 1`] = `
+"Before
+
+---
+
+After"
+`;
+
+exports[`blocksToMarkdown > converts images 1`] = `"![Alt text](https://example.com/image.png)"`;
+
+exports[`blocksToMarkdown > converts links 1`] = `"Check out [this link](https://example.com) for more info."`;
+
+exports[`blocksToMarkdown > converts numbered lists 1`] = `
+"1. First item
+
+1. Second item
+
+1. Third item"
+`;
+
+exports[`blocksToMarkdown > converts paragraphs with inline formatting 1`] = `"This is **bold** and *italic* and ~~strikethrough~~ and \`code\`."`;
+
+exports[`markdownToNotionBlocks > converts blockquotes 1`] = `
+[
+  {
+    "object": "block",
+    "quote": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "This is a quote",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "type": "quote",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts bullet lists 1`] = `
+[
+  {
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "First item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "bulleted_list_item",
+  },
+  {
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Second item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "bulleted_list_item",
+  },
+  {
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Third item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "bulleted_list_item",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts code blocks with language 1`] = `
+[
+  {
+    "code": {
+      "language": "typescript",
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "const x = 42;
+console.log(x);",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "code",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts headings 1`] = `
+[
+  {
+    "heading_1": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Heading 1",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "heading_1",
+  },
+  {
+    "heading_2": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Heading 2",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "heading_2",
+  },
+  {
+    "heading_3": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Heading 3",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "heading_3",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts horizontal rules 1`] = `
+[
+  {
+    "object": "block",
+    "paragraph": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Before",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "type": "paragraph",
+  },
+  {
+    "divider": {},
+    "object": "block",
+    "type": "divider",
+  },
+  {
+    "object": "block",
+    "paragraph": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "After",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "type": "paragraph",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts images 1`] = `
+[
+  {
+    "image": {
+      "external": {
+        "url": "https://example.com/image.png",
+      },
+      "type": "external",
+    },
+    "object": "block",
+    "type": "image",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts links 1`] = `
+[
+  {
+    "object": "block",
+    "paragraph": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Check out ",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "this link",
+            "link": {
+              "url": "https://example.com",
+            },
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": " for more info.",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "type": "paragraph",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts numbered lists 1`] = `
+[
+  {
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "First item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "numbered_list_item",
+  },
+  {
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Second item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "numbered_list_item",
+  },
+  {
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "Third item",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "object": "block",
+    "type": "numbered_list_item",
+  },
+]
+`;
+
+exports[`markdownToNotionBlocks > converts paragraphs with inline formatting 1`] = `
+[
+  {
+    "object": "block",
+    "paragraph": {
+      "rich_text": [
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "This is ",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": true,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "bold",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": " and ",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": true,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "italic",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": " and ",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": true,
+            "underline": false,
+          },
+          "text": {
+            "content": "strikethrough",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": " and ",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": true,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": "code",
+            "link": null,
+          },
+          "type": "text",
+        },
+        {
+          "annotations": {
+            "bold": false,
+            "code": false,
+            "color": "default",
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+          },
+          "text": {
+            "content": ".",
+            "link": null,
+          },
+          "type": "text",
+        },
+      ],
+    },
+    "type": "paragraph",
+  },
+]
+`;
