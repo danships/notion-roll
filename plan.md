@@ -384,9 +384,9 @@ notion-roll/
     - ✅ Installation instructions, examples, configuration
     - ✅ Supported features tables
 
-20. **Add CI configuration (optional)**
-    - Unit tests on all PRs
-    - Integration tests on protected branches with secrets
+20. ✅ **Add CI configuration**
+    - ✅ Unit tests, lint, typecheck on all PRs and pushes to main
+    - ✅ Integration tests on main branch only (requires secrets)
 
 ---
 
