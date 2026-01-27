@@ -319,13 +319,14 @@ notion-roll/
 
 ### Phase 4: NotionRoll Facade (Step 11)
 
-11. **Implement NotionRoll class**
-    - `createPage` - orchestrates property conversion + block append
-    - `getPage` - metadata + optional content (block traversal → markdown)
-    - `updatePage` - with contentMode (replace/append)
-    - `archivePage` - set archived: true
-    - `queryDatabase` - with pagination support
-    - `getDatabaseSchema` - cached
+11. ✅ **Implement NotionRoll class**
+    - ✅ `createPage` - orchestrates property conversion + markdown→blocks + API call
+    - ✅ `getPage` - metadata + optional content (block traversal → markdown)
+    - ✅ `updatePage` - with contentMode (replace/append), property conversion
+    - ✅ `archivePage` - set archived: true
+    - ✅ `queryDataSource` - with pagination support, property conversion
+    - ✅ `getDataSourceSchema` - cached via SchemaCache
+    - ✅ `getDataSources` - list data sources for a database
 
 ### Phase 5: Server Implementation (Steps 12-14)
 
