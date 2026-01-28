@@ -1,5 +1,7 @@
 # notion-roll
 
+> 🌯 *Why "notion-roll"? It's a **wrapper** around the Notion API — and a wrap is just a roll by another name.*
+
 Node library for simplified Notion API interactions with markdown support.
 
 ## Installation
