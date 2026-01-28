@@ -22,3 +22,9 @@ export {
   READ_ONLY_PROPERTY_TYPES,
   SUPPORTED_MARKDOWN_FEATURES,
 } from "./types.js";
+export {
+  NotionRollConfigSchema,
+  PageCreateRequestSchema,
+  PageUpdateRequestSchema,
+  DatabaseQueryRequestSchema,
+} from "./validation.js";

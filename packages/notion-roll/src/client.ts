@@ -6,6 +6,12 @@ import { markdownToNotionBlocks } from "./markdown/to-blocks.js";
 import { blocksToMarkdown } from "./markdown/from-blocks.js";
 import { toNotionProperties, fromNotionProperties } from "./properties/index.js";
 import { SchemaCache } from "./properties/schema-cache.js";
+import {
+  validateConfig,
+  validatePageCreateRequest,
+  validatePageUpdateRequest,
+  validateDatabaseQueryRequest,
+} from "./validation.js";
 import type {
   NotionRollConfig,
   PageCreateRequest,
@@ -23,35 +29,37 @@ export class NotionRoll {
   private readonly schemaCache: SchemaCache;
 
   constructor(config: NotionRollConfig) {
+    const validatedConfig = validateConfig(config);
     this.api = new ApiClient({
-      apiKey: config.apiKey,
-      baseUrl: config.baseUrl,
-      notionVersion: config.notionVersion,
+      apiKey: validatedConfig.apiKey,
+      baseUrl: validatedConfig.baseUrl,
+      notionVersion: validatedConfig.notionVersion,
     });
     this.schemaCache = new SchemaCache(this.api);
   }
 
   async createPage(request: PageCreateRequest): Promise<PageResponse> {
-    const parent = "pageId" in request.parent
-      ? { page_id: request.parent.pageId }
-      : { data_source_id: request.parent.dataSourceId };
+    const validatedRequest = validatePageCreateRequest(request);
+    const parent = "pageId" in validatedRequest.parent
+      ? { page_id: validatedRequest.parent.pageId }
+      : { data_source_id: validatedRequest.parent.dataSourceId };
 
     // Convert markdown content to blocks
-    const children = request.content
-      ? markdownToNotionBlocks(request.content)
+    const children = validatedRequest.content
+      ? markdownToNotionBlocks(validatedRequest.content)
       : [];
 
     // Build properties with title
     let properties: Record<string, unknown> = {
       title: {
-        title: [{ type: "text", text: { content: request.title } }],
+        title: [{ type: "text", text: { content: validatedRequest.title } }],
       },
     };
 
     // Convert additional properties if we have a data source parent
-    if ("dataSourceId" in request.parent && request.properties) {
-      const schema = await this.schemaCache.getSchema(request.parent.dataSourceId);
-      const convertedProps = toNotionProperties(request.properties, schema.properties);
+    if ("dataSourceId" in validatedRequest.parent && validatedRequest.properties) {
+      const schema = await this.schemaCache.getSchema(validatedRequest.parent.dataSourceId);
+      const convertedProps = toNotionProperties(validatedRequest.properties, schema.properties);
       properties = { ...properties, ...convertedProps };
     }
 
@@ -62,7 +70,7 @@ export class NotionRoll {
       children as unknown[]
     );
 
-    return this.convertPageResponse(notionPage, request.content ?? "");
+    return this.convertPageResponse(notionPage, validatedRequest.content ?? "");
   }
 
   async getPage(
@@ -81,49 +89,51 @@ export class NotionRoll {
   }
 
   async updatePage(request: PageUpdateRequest): Promise<PageResponse> {
+    const validatedRequest = validatePageUpdateRequest(request);
+    
     // Update properties if provided
-    if (request.properties || request.title) {
+    if (validatedRequest.properties || validatedRequest.title) {
       const propertiesToUpdate: Record<string, unknown> = {};
 
-      if (request.title) {
+      if (validatedRequest.title) {
         propertiesToUpdate["title"] = {
-          title: [{ type: "text", text: { content: request.title } }],
+          title: [{ type: "text", text: { content: validatedRequest.title } }],
         };
       }
 
-      if (request.properties) {
+      if (validatedRequest.properties) {
         // Try to get schema from parent if it's a database page
-        const page = await pages.getPageMeta(this.api, request.pageId);
+        const page = await pages.getPageMeta(this.api, validatedRequest.pageId);
         if (page.parent.type === "data_source_id") {
           const dataSourceId = (page.parent as { data_source_id: string }).data_source_id;
           const schema = await this.schemaCache.getSchema(dataSourceId);
-          const convertedProps = toNotionProperties(request.properties, schema.properties);
+          const convertedProps = toNotionProperties(validatedRequest.properties, schema.properties);
           Object.assign(propertiesToUpdate, convertedProps);
         }
       }
 
       if (Object.keys(propertiesToUpdate).length > 0) {
-        await pages.updatePageProperties(this.api, request.pageId, propertiesToUpdate);
+        await pages.updatePageProperties(this.api, validatedRequest.pageId, propertiesToUpdate);
       }
     }
 
     // Update content if provided
-    if (request.content !== undefined) {
-      const newBlocks = markdownToNotionBlocks(request.content);
+    if (validatedRequest.content !== undefined) {
+      const newBlocks = markdownToNotionBlocks(validatedRequest.content);
 
-      if (request.contentMode === "append") {
+      if (validatedRequest.contentMode === "append") {
         await blocks.appendBlockChildren(
           this.api,
-          request.pageId,
+          validatedRequest.pageId,
           newBlocks as NotionBlock[]
         );
       } else {
         // Replace mode - delete existing blocks first
-        await blocks.deleteBlockChildren(this.api, request.pageId);
+        await blocks.deleteBlockChildren(this.api, validatedRequest.pageId);
         if (newBlocks.length > 0) {
           await blocks.appendBlockChildren(
             this.api,
-            request.pageId,
+            validatedRequest.pageId,
             newBlocks as NotionBlock[]
           );
         }
@@ -131,7 +141,7 @@ export class NotionRoll {
     }
 
     // Fetch and return updated page
-    return this.getPage(request.pageId, { includeContent: true });
+    return this.getPage(validatedRequest.pageId, { includeContent: true });
   }
 
   async archivePage(pageId: string): Promise<PageResponse> {
@@ -144,14 +154,16 @@ export class NotionRoll {
   async queryDataSource(
     request: DatabaseQueryRequest
   ): Promise<Paginated<PageResponse>> {
-    const response = await databases.queryDataSource(this.api, request.dataSourceId, {
-      filter: request.filter,
-      sorts: request.sorts,
-      page_size: request.pageSize,
-      start_cursor: request.startCursor,
+    const validatedRequest = validateDatabaseQueryRequest(request);
+    
+    const response = await databases.queryDataSource(this.api, validatedRequest.dataSourceId, {
+      filter: validatedRequest.filter,
+      sorts: validatedRequest.sorts,
+      page_size: validatedRequest.pageSize,
+      start_cursor: validatedRequest.startCursor,
     });
 
-    const schema = await this.schemaCache.getSchema(request.dataSourceId);
+    const schema = await this.schemaCache.getSchema(validatedRequest.dataSourceId);
 
     const results = await Promise.all(
       response.results.map(async (page) => {
