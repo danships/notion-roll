@@ -19,6 +19,12 @@ interface QueryDataSourceBody {
   startCursor?: string;
 }
 
+interface CreateDatabaseBody {
+  parentPageId: string;
+  title: string;
+  properties: Record<string, unknown>;
+}
+
 export async function handleDatabases(
   req: IncomingMessage,
   res: ServerResponse,
@@ -28,6 +34,33 @@ export async function handleDatabases(
 
   try {
     const client = getNotionClient(req);
+
+    // Match POST /api/databases (create database)
+    if (path === "/api/databases" && method === "POST") {
+      const body = await parseJsonBody<CreateDatabaseBody>(req);
+
+      if (!body.parentPageId || !body.title || !body.properties) {
+        sendError(res, 400, "Missing required fields: parentPageId, title, properties");
+        return;
+      }
+
+      const result = await client.createDatabase({
+        parentPageId: body.parentPageId,
+        title: body.title,
+        properties: body.properties,
+      });
+      sendJson(res, 201, result);
+      return;
+    }
+
+    // Match POST /api/databases/:id/archive
+    const archiveMatch = /^\/api\/databases\/([^/]+)\/archive$/.exec(path);
+    if (archiveMatch && method === "POST") {
+      const databaseId = archiveMatch[1]!;
+      const result = await client.archiveDatabase(databaseId);
+      sendJson(res, 200, result);
+      return;
+    }
 
     // Match /api/databases/:id/query
     const queryMatch = /^\/api\/databases\/([^/]+)\/query$/.exec(path);

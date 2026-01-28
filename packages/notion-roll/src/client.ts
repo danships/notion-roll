@@ -187,8 +187,27 @@ export class NotionRoll {
     const dataSources = await databases.getDataSources(this.api, databaseId);
     return dataSources.map((ds) => ({
       id: ds.id,
-      type: ds.type,
+      type: ds.type ?? "default",
     }));
+  }
+
+  async createDatabase(request: {
+    parentPageId: string;
+    title: string;
+    properties: Record<string, unknown>;
+  }): Promise<{ id: string; title: string }> {
+    const database = await databases.createDatabase(this.api, {
+      parent: { page_id: request.parentPageId },
+      title: request.title,
+      properties: request.properties,
+    });
+    const title = database.title.map((t) => t.plain_text).join("");
+    return { id: database.id, title };
+  }
+
+  async archiveDatabase(databaseId: string): Promise<{ id: string }> {
+    const database = await databases.archiveDatabase(this.api, databaseId);
+    return { id: database.id };
   }
 
   private convertPageResponse(

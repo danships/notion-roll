@@ -1,11 +1,35 @@
 import type { ApiClient } from "./client.js";
 import type { NotionDatabase, NotionDataSource } from "./types.js";
 
+export interface CreateDatabaseOptions {
+  parent: { page_id: string };
+  title: string;
+  properties: Record<string, unknown>;
+}
+
+export async function createDatabase(
+  api: ApiClient,
+  options: CreateDatabaseOptions
+): Promise<NotionDatabase> {
+  return api.post<NotionDatabase>("/databases", {
+    parent: { type: "page_id", ...options.parent },
+    title: [{ type: "text", text: { content: options.title } }],
+    properties: options.properties,
+  });
+}
+
 export async function getDatabase(
   api: ApiClient,
   databaseId: string
 ): Promise<NotionDatabase> {
   return api.get<NotionDatabase>(`/databases/${databaseId}`);
+}
+
+export async function archiveDatabase(
+  api: ApiClient,
+  databaseId: string
+): Promise<NotionDatabase> {
+  return api.patch<NotionDatabase>(`/databases/${databaseId}`, { archived: true });
 }
 
 export async function getDataSources(
