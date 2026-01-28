@@ -14,7 +14,9 @@ export async function createDatabase(
   return api.post<NotionDatabase>("/databases", {
     parent: { type: "page_id", ...options.parent },
     title: [{ type: "text", text: { content: options.title } }],
-    properties: options.properties,
+    initial_data_source: {
+      properties: options.properties,
+    },
   });
 }
 
