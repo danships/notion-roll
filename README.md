@@ -1,5 +1,7 @@
 # Notion Roll
 
+> 🌯 *Why "notion-roll"? It's a **wrapper** around the Notion API — and a wrap is just a roll by another name.*
+
 A monorepo containing tools for simplified Notion API interactions with markdown support.
 
 ## Packages
