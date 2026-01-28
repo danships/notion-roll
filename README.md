@@ -187,7 +187,7 @@ pnpm test:integration
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `NOTION_API_KEY` | Notion integration API key | Yes |
+| `NOTION_API_KEY` | Notion integration API key | Server only (if no Auth header) |
 | `NOTION_TEST_PARENT_PAGE` | Parent page ID for integration tests | For tests |
 | `PORT` | Server port (default: 3000) | No |
 
